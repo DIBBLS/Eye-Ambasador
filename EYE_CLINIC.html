@@ -165,11 +165,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(27,45,83,0.08); }
   display: flex; align-items: stretch;
 }
 .hero-right::after {
-  content: ''; position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, var(--off-white) 0%, transparent 20%),
-              linear-gradient(to top, var(--off-white) 0%, transparent 25%);
-  z-index: 1; pointer-events: none;
+  display: none;
 }
 .hero-right img {
   width: 100%; height: 100%; object-fit: cover;
@@ -609,9 +605,10 @@ footer {
       <span class="gold-word">Here.</span>
     </h1>
     <p class="hero-sub">
-      Dr. Peter Aina and the Eye Ambassadors team bring
-      <strong>over a decade of expert eye care</strong> to the heart of Ayetoro —
-      combining clinical excellence with genuine community commitment.
+      At Eye Ambassadors, your vision is managed directly by Dr. Peter Aina.
+      <strong>With over ten years of experience in diagnostic and corrective optometry,</strong>
+      Dr. Aina provides a seamless, one-on-one experience that merges professional-grade
+      clinical care with genuine community commitment.
     </p>
     <div class="hero-actions">
       <a href="#booking" class="btn-navy">
@@ -671,12 +668,13 @@ footer {
   </div>
   <div class="fade-up d1">
     <p class="section-label">Who We Are</p>
-    <h2 class="section-title">More Than a Clinic.<br>A Community Mission.</h2>
+    <h2 class="section-title">More Than a Clinic.<br>Your Vision Our Mission.</h2>
     <p class="section-sub" style="margin-bottom:1.4rem">
-      Eye Ambassadors is more than an optical clinic—it’s a center for vision health and education.
-      Dr. Peter Aina and his team bridge the gap between specialist medical science and everyday eye
-      care. Built on a foundation of empowerment and clinical precision, we provide the Epe
-      community with the tools to see the world with total clarity.
+      Eye Ambassadors is more than an optical clinic — it's a centre for vision health
+      and education. Dr. Peter Aina and his team bridge the gap between specialist
+      medical science and everyday eye care. Built on a foundation of empowerment
+      and clinical precision, we provide Nigerians with the tools to see the world
+      with total clarity.
     </p>
     <div class="reg-row">
       <div class="reg-tag"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v5c0 5.55 3.84 10.74 10 12 6.16-1.26 10-6.45 10-12V7L12 2z"/></svg>ODORBN Registered</div>
@@ -886,23 +884,30 @@ footer {
     <p class="section-label">Get In Touch</p>
     <h2 class="section-title">Book an Appointment</h2>
     <p class="section-sub" style="margin-bottom:2rem">Walk-ins are welcome, but booking ahead guarantees your slot. Fill the form or reach us directly.</p>
-    <form class="booking-form" onsubmit="handleSubmit(event)">
+    <!--
+      SETUP (2 mins):
+      1. Go to formspree.io, sign up free with Gmail
+      2. Click New Form, copy the form ID (e.g. xbjvkpqz)
+      3. Replace YOUR_FORMSPREE_ID below with that ID
+      Submissions go straight to Gmail. WhatsApp fires automatically too.
+    -->
+    <form class="booking-form" id="bookingForm" onsubmit="handleSubmit(event)">
       <div class="form-row">
-        <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" placeholder="Adaeze"></div>
-        <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Okafor"></div>
+        <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" name="first_name" placeholder="Adaeze" required></div>
+        <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" name="last_name" placeholder="Okafor" required></div>
       </div>
-      <div class="form-group"><label for="phone">Phone / WhatsApp</label><input type="tel" id="phone" placeholder="+234 800 000 0000"></div>
+      <div class="form-group"><label for="phone">Phone / WhatsApp</label><input type="tel" id="phone" name="phone" placeholder="+234 800 000 0000" required></div>
       <div class="form-group"><label for="age-group">Age Group</label>
-        <select id="age-group">
+        <select id="age-group" name="age_group" required>
           <option value="">Select age group</option>
           <option>Child (Under 16)</option>
-          <option>Young Adult (16–30)</option>
-          <option>Adult (31–45)</option>
+          <option>Young Adult (16-30)</option>
+          <option>Adult (31-45)</option>
           <option>Senior (46+)</option>
         </select>
       </div>
       <div class="form-group"><label for="service">Service Needed</label>
-        <select id="service">
+        <select id="service" name="service" required>
           <option value="">Select a service</option>
           <option>Comprehensive Eye Exam</option>
           <option>Refraction / Prescription Test</option>
@@ -910,13 +915,17 @@ footer {
           <option>Cataract Screening</option>
           <option>Contact Lens Fitting</option>
           <option>Eyewear / Frames</option>
-          <option>Not Sure — Need Advice</option>
+          <option>Not Sure - Need Advice</option>
         </select>
       </div>
-      <div class="form-group"><label for="preferred-date">Preferred Date</label><input type="date" id="preferred-date"></div>
-      <div class="form-group"><label for="notes">Additional Notes</label><textarea id="notes" placeholder="Any symptoms, concerns, or previous prescription details..."></textarea></div>
-      <button type="submit" class="form-submit">Confirm Appointment &rarr;</button>
+      <div class="form-group"><label for="preferred-date">Preferred Date</label><input type="date" id="preferred-date" name="preferred_date" required></div>
+      <div class="form-group"><label for="notes">Additional Notes</label><textarea id="notes" name="notes" placeholder="Any symptoms, concerns, or previous prescription details..."></textarea></div>
+      <button type="submit" class="form-submit" id="submitBtn">Confirm Appointment &rarr;</button>
     </form>
+    <div id="successMsg" style="display:none;margin-top:1.5rem;padding:1.2rem 1.5rem;background:#f0faf4;border:1px solid #a8dfc0;border-radius:12px;border-left:4px solid #25D366;">
+      <p style="font-weight:600;color:#1a6b3a;margin-bottom:0.3rem;">Appointment Request Sent!</p>
+      <p style="font-size:0.88rem;color:#3a7a5a;">Dr. Aina will contact you shortly to confirm your slot. You can also reach him directly on WhatsApp below.</p>
+    </div>
   </div>
   <div class="contact-panel fade-up d1">
     <div class="contact-block">
@@ -971,27 +980,72 @@ footer {
 </footer>
 
 <script>
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', function() {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-const lbImgs = ['images/gallery-1.jpg','images/gallery-2.jpg','images/gallery-3.jpg','images/gallery-4.jpg','images/gallery-5.jpg','images/gallery-6.jpg'];
-let lbIdx = 0;
+var lbImgs = ['images/gallery-1.jpg','images/gallery-2.jpg','images/gallery-3.jpg','images/gallery-4.jpg','images/gallery-5.jpg','images/gallery-6.jpg'];
+var lbIdx = 0;
 function openLB(i){ lbIdx=i; document.getElementById('lb-img').src=lbImgs[i]; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeLB(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
 function closeLBBg(e){ if(e.target===document.getElementById('lightbox')) closeLB(); }
 function shiftLB(d){ lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length; document.getElementById('lb-img').src=lbImgs[lbIdx]; }
-document.addEventListener('keydown',e=>{ if(!document.getElementById('lightbox').classList.contains('open')) return; if(e.key==='Escape') closeLB(); if(e.key==='ArrowLeft') shiftLB(-1); if(e.key==='ArrowRight') shiftLB(1); });
+document.addEventListener('keydown', function(e){
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key==='Escape') closeLB();
+  if(e.key==='ArrowLeft') shiftLB(-1);
+  if(e.key==='ArrowRight') shiftLB(1);
+});
 
-const obs = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:0.1});
-document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(function(el){ obs.observe(el); });
 
-function handleSubmit(e){
+async function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
-  btn.textContent = 'Appointment Requested ✓';
-  btn.style.background = '#1a6b3a';
-  setTimeout(()=>{ btn.textContent='Confirm Appointment →'; btn.style.background=''; }, 3000);
+  var btn = document.getElementById('submitBtn');
+  var form = document.getElementById('bookingForm');
+  var successMsg = document.getElementById('successMsg');
+
+  var fname = document.getElementById('fname').value.trim();
+  var lname = document.getElementById('lname').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var ageGroup = document.getElementById('age-group').value;
+  var service = document.getElementById('service').value;
+  var date = document.getElementById('preferred-date').value;
+  var notes = document.getElementById('notes').value.trim();
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  var FORMSPREE_ID = 'YOUR_FORMSPREE_ID';
+  if (FORMSPREE_ID !== 'YOUR_FORMSPREE_ID') {
+    try {
+      await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          first_name: fname, last_name: lname, phone: phone,
+          age_group: ageGroup, service: service,
+          preferred_date: date, notes: notes
+        })
+      });
+    } catch(err) { console.log('Formspree error:', err); }
+  }
+
+  var line1 = 'Hello Dr. Aina, I would like to book an appointment at Eye Ambassadors.';
+  var line2 = 'Name: ' + fname + ' ' + lname;
+  var line3 = 'Phone: ' + phone;
+  var line4 = 'Age Group: ' + ageGroup;
+  var line5 = 'Service: ' + service;
+  var line6 = 'Preferred Date: ' + date;
+  var line7 = notes ? 'Notes: ' + notes : '';
+  var waMsg = encodeURIComponent([line1, '', line2, line3, line4, line5, line6, line7].join('\n'));
+  window.open('https://wa.me/2348133374478?text=' + waMsg, '_blank');
+
+  form.style.display = 'none';
+  successMsg.style.display = 'block';
 }
 </script>
 </body>
