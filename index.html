@@ -722,7 +722,7 @@
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 280px 280px;
+      grid-template-rows: 340px 340px;
       gap: 10px;
     }
 
@@ -742,6 +742,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
       transition: transform 0.5s ease;
     }
@@ -1475,13 +1476,13 @@
       }
 
       .gallery-item {
-        height: 150px;
+        height: 210px;
       }
 
       .gallery-item.featured {
         grid-column: 1/3;
         grid-row: auto;
-        height: 200px;
+        height: 270px;
       }
 
       .social-grid {
