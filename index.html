@@ -354,7 +354,7 @@
       overflow: hidden;
       display: flex;
       align-items: stretch;
-      min-height: 520px;
+      min-height: clamp(520px, calc(100vh - 76px), 680px);
     }
 
     .hero-right::after {
@@ -362,6 +362,8 @@
     }
 
     .hero-right img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
